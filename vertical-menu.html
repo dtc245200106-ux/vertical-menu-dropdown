@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn tạo Menu Dọc Dropdown</title>
+    <style>
+        /* ============================================
+           RESET & GLOBAL
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #1a2a4a;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #c9a227;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* ============================================
+           MENU CHÍNH (Menu dọc)
+           ============================================ */
+        #menu {
+            width: 200px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu li {
+            list-style: none;
+            position: relative;    /* Cho phép menu con định vị theo */
+            width: 160px;
+            height: 40px;
+            padding: 0 20px;
+            background-color: #333;
+            line-height: 40px;
+            cursor: pointer;
+            color: white;
+            font-size: 15px;
+            border-bottom: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+
+        #menu li:hover {
+            background-color: #c9a227;
+            color: #1a2a4a;
+            font-weight: bold;
+        }
+
+        #menu li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        #menu li:hover > a {
+            color: #1a2a4a;
+        }
+
+        /* ============================================
+           MENU CON (Dropdown)
+           ============================================ */
+        #menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 160px;
+            visibility: hidden;    /* Ẩn menu con mặc định */
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Hiển thị menu con khi hover vào mục cha */
+        #menu li:hover > ul {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Định dạng các mục trong menu con */
+        #menu ul li {
+            background-color: #1a2a4a;
+            border-bottom: 1px solid #2c4370;
+            width: 160px;
+            height: 40px;
+            padding: 0 20px;
+            line-height: 40px;
+        }
+
+        #menu ul li:hover {
+            background-color: #c9a227;
+            color: #1a2a4a;
+        }
+
+        /* Mũi tên chỉ mục có menu con */
+        #menu li.has-submenu::after {
+            content: "▸";
+            position: absolute;
+            right: 15px;
+            color: #c9a227;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        #menu li.has-submenu:hover::after {
+            transform: rotate(90deg);
+            color: #1a2a4a;
+        }
+
+        /* ============================================
+           DEMO AREA
+           ============================================ */
+        .demo-box {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+        }
+
+        .demo-box h3 {
+            color: #1a2a4a;
+            margin-bottom: 15px;
+        }
+
+        .demo-box p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .demo-box code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #c0392b;
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Menu Dọc Dropdown</h1>
+
+    <!-- ============================================
+         MENU DỌC
+         ============================================ -->
+    <ul id="menu">
+
+        <!-- Mục 1: Trang chủ -->
+        <li>
+            <a href="#">🏠 Trang chủ</a>
+        </li>
+
+        <!-- Mục 2: Sản phẩm (Có menu con) -->
+        <li class="has-submenu">
+            <a href="#">📦 Sản phẩm</a>
+            <ul>
+                <li><a href="#">Điện thoại</a></li>
+                <li><a href="#">Laptop</a></li>
+                <li><a href="#">Máy tính bảng</a></li>
+                <li><a href="#">Phụ kiện</a></li>
+            </ul>
+        </li>
+
+        <!-- Mục 3: Dịch vụ (Có menu con) -->
+        <li class="has-submenu">
+            <a href="#">🛠️ Dịch vụ</a>
+            <ul>
+                <li><a href="#">Thiết kế web</a></li>
+                <li><a href="#">SEO Marketing</a></li>
+                <li><a href="#">Bảo trì hệ thống</a></li>
+            </ul>
+        </li>
+
+        <!-- Mục 4: Tin tức -->
+        <li>
+            <a href="#">📰 Tin tức</a>
+        </li>
+
+        <!-- Mục 5: Liên hệ -->
+        <li>
+            <a href="#">📞 Liên hệ</a>
+        </li>
+
+    </ul>
+
+    <!-- ============================================
+         DEMO BOX
+         ============================================ -->
+    <div class="demo-box">
+        <h3>📝 Hướng dẫn sử dụng</h3>
+        <p>Hãy <strong>rê chuột</strong> vào các mục có dấu <code>▸</code> (Sản phẩm, Dịch vụ) để xem menu con xuất hiện.</p>
+        <p>Menu con sẽ <strong>trượt sang phải</strong> và hiển thị các mục con.</p>
+        <p>Di chuyển chuột ra ngoài → menu con tự động ẩn.</p>
+    </div>
+
+</body>
+</html>
